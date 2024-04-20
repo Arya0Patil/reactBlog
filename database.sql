@@ -1,7 +1,7 @@
 create database logapp;
 
 
-
+use lagapp;
 
 create table user(
     id integer primary key auto_increment,
@@ -19,7 +19,7 @@ create table blogs
  title varchar(20),
  contents varchar (200),
  createdTimestamp DATETIME default CURRENT_TIMESTAMP,
- user_id int  key,
+ user_id int  ,
  category_id int 
 );
 
@@ -28,4 +28,4 @@ create table categories (
  id integer primary key auto_increment,
  title varchar (20),
  description varchar(50)   
-)
+);

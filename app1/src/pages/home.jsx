@@ -15,14 +15,31 @@ function Home() {
   }
 
   return (
-    <div>
-      <h2 className='page-title'>My Airbnb</h2>
-      <button onClick={onLogout} className='btn btn-warning'>
-        Logout
-      </button>
+    <div className='container' >
+      <h2 className='page-title'>Just Blog</h2>
+      <div style={{display:'flex'}}>
+        <div >
+          <div style={{}}>
+              <ul>
+                <li>New Blog</li>
+                <li>My Blog</li>
+                <li>All Blog</li>
+                <li>Find Blog</li>
+                <li>Categories Blog</li>
+                <li>Logout</li>
+              </ul>
+          </div>
+        </div>
+        <br />
+        <div>
+          <div style={{backgroundColor:'red'}}>
+             {/* <CategoryList /> */}
+          </div>
+        </div>
+      </div>
 
-      <div>
-        <CategoryList />
+    <div>
+       
       </div>
     </div>
   )

@@ -7,9 +7,9 @@ function CategoryList() {
   const [categories, setCategories] = useState([])
 
   // used to perform action(s) after component gets loaded
-  useEffect(() => {
-    loadCategories()
-  }, [])
+  // useEffect(() => {
+  //   loadCategories()
+  // }, [])
 
   const loadCategories = async () => {
     const result = await getCategories()
