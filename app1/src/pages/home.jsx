@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import CategoryList from '../components/categoryList'
 
 function Home() {
@@ -21,7 +22,7 @@ function Home() {
         <div >
           <div style={{}}>
               <ul>
-                <li>New Blog</li>
+                <li><Link to={'/addblog'}>New Blog</Link></li>
                 <li>My Blog</li>
                 <li>All Blog</li>
                 <li>Find Blog</li>
@@ -32,8 +33,8 @@ function Home() {
         </div>
         <br />
         <div>
-          <div style={{backgroundColor:'red'}}>
-             {/* <CategoryList /> */}
+          <div className='col col-12' style={{border:'1px solid',borderRadius:'5px'}}>
+             <CategoryList />
           </div>
         </div>
       </div>

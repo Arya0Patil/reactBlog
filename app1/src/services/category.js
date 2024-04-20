@@ -7,7 +7,7 @@ export async function getCategories() {
   // const token = sessionStorage['token']
   const token = sessionStorage.getItem('token')
 
-  const response = await axios.get(`${config.url}/category`, {
+  const response = await axios.get(`${config.url}/blog/getblogs`, {
     headers: {
       token,
     },

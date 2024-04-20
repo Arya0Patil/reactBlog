@@ -4,29 +4,29 @@ import Category from './category'
 
 function CategoryList() {
   // create state member
-  const [categories, setCategories] = useState([])
+  const [blogs, setBlogs] = useState([])
 
   // used to perform action(s) after component gets loaded
-  // useEffect(() => {
-  //   loadCategories()
-  // }, [])
+  useEffect(() => {
+    loadCategories()
+  }, [])
 
   const loadCategories = async () => {
     const result = await getCategories()
     if (result['status'] === 'success') {
-      setCategories(result['data'])
+      setBlogs(result['data'])
     }
   }
 
   return (
     <div>
       <div>
-        {categories.map((category) => {
+        {blogs.map((blog) => {
           return (
             <Category
-              title={category.title}
-              details={category.details}
-              image={category.image}
+              title={blog.title}
+              details={blog.contents}
+              // image={category.image}
             />
           )
         })}

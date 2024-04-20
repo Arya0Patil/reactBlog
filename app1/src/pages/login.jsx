@@ -19,11 +19,13 @@ function LoginUser() {
       toast.warning('enter password')
     } else {
       const result = await login(email, password)
+      
       if (result['status'] === 'success') {
         // read the token
         // const token = result['data']['token']
         // const name = result['data']['name']
-        const { token, name } = result['data']
+        console.log(result['data']  );
+        const { token, id, full_name} = result['data']
 
         // set the data in session storage
         // sessionStorage.token = token
@@ -33,7 +35,8 @@ function LoginUser() {
         // sessionStorage['name'] = name
 
         sessionStorage.setItem('token', token)
-        sessionStorage.setItem('name', name)
+        sessionStorage.setItem('id', id)
+        sessionStorage.setItem('name', full_name)
 
         toast.success('welcome to the application')
         navigate('/home')

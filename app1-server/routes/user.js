@@ -8,12 +8,12 @@ const config = require('../config')
 const router = express.Router()
 
 router.post('/register', (request, response) => {
-  const { firstName, lastName, email, password, phone } = request.body
-  const statement = `insert into user (firstName, lastName, email, password, phoneNumber) values (?, ?, ?, ?, ?);`
-  const encryptedPassword = String(crypto.SHA256(password))
+  const {full_name, email, password, phone_no } = request.body
+  const statement = `insert into user (full_name,phone_no, email, password) values (?, ?, ?, ?);`
+  // const encryptedPassword = String(crypto.SHA256(password))
   db.pool.execute(
     statement,
-    [firstName, lastName, email, encryptedPassword, phone],
+    [full_name,phone_no, email, password ],
     (error, result) => {
       response.send(utils.createResult(error, result))
     }
@@ -22,9 +22,9 @@ router.post('/register', (request, response) => {
 
 router.post('/login', (request, response) => {
   const { email, password } = request.body
-  const statement = `select id, firstName, lastName, phoneNumber, isDeleted from user where email = ? and password = ?`
-  const encryptedPassword = String(crypto.SHA256(password))
-  db.pool.query(statement, [email, encryptedPassword], (error, users) => {
+  const statement = `select id, full_name,email,phone_no from user where email = ? and password = ?`
+  // const encryptedPassword = String(crypto.SHA256(password))
+  db.pool.query(statement, [email, password], (error, users) => {
     if (error) {
       response.send(utils.createErrorResult(error))
     } else {
@@ -40,7 +40,7 @@ router.post('/login', (request, response) => {
           const token = jwt.sign(payload, config.secret)
           const userData = {
             token,
-            name: `${user['firstName']} ${user['lastName']}`,
+            id: `${user['id']}`,
           }
           response.send(utils.createSuccessResult(userData))
         }

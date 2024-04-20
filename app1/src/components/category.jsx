@@ -1,12 +1,13 @@
 import config from '../config'
 
-function Category({ title, details, image }) {
+function Category({ title, details}) {
   return (
     <div
       style={{ display: 'inline-block', marginRight: 20, textAlign: 'center' }}
     >
-      <img style={{ width: 24 }} src={`${config.url}/image/${image}`} alt='' />
-      <div style={{ fontWeight: '600', fontSize: 15 }}>{title}</div>
+     
+      <div style={{ fontWeight: '600', fontSize: 15 }}><h4>{title}</h4></div>
+      <div style={{ fontWeight: '600', fontSize: 15 }}>{details}</div>
     </div>
   )
 }
