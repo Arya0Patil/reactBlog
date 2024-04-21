@@ -1,49 +1,55 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 import { addBlog } from "../services/blog";
 import axios from 'axios'
 import config from "../config";
+import { toast } from "react-toastify";
 
-function AddBlog() {
+function UpdateBlog() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [category, setCategory] = useState("");
-const [options, setOptions] = useState([]);
-const navigate = useNavigate()
+  const id = sessionStorage.getItem('blogId')
+  const navigate = useNavigate()
+//   const [category, setCategory] = useState("");
+// const [options, setOptions] = useState([]);
   
-    useEffect(() => {
-      axios.get(`${config.url}/category`)
-        .then(response => {
-          setOptions(response.data['data']);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    }, []);
-//   console.log(options);
-    const handleChange = (event) => {
-      // Handle the change event here
-    };
-  
-   
+//     useEffect(() => {
+//       axios.get(`${config.url}/blog/editblog`)
+//         .then(response => {
+//           setOptions(response.data['data']);
+//         })
+//         .catch(error => {
+//           console.log(error);
+//         });
+//     }, []);
+// //   console.log(options);
+//     const handleChange = (event) => {
+//       // Handle the change event here
+//     };
+
+useEffect(() => {
+    setTitle(sessionStorage.getItem('blogTitle'))
+    setContent(sessionStorage.getItem('blogDesc'))
+}, [])
+ 
 
 
   const onAdd = () => {
-    addblog();
+    updateblog();
     console.log('onAdd');
+    
   };
 
 //   const token = sessionStorage.getItem('token')
-  async function addblog() {
-    const result = await addBlog(title, content,category);
+  async function updateblog() {
+    const body = {title,'contents':content,'id':id}
+    const result =  await axios.post(`${config.url}/blog/editblog`, body);
     console.log(result);
-    if(result['status']==='success'){
-        // alert('success')
-        // <toast className="success"></toast>()
-        navigate('/myblogs')
+    if(result.data['status']==='success'){
+        toast.success("edit succcessful")
     }
     
-    
+    navigate('/myblogs')
   }
 
 //   console.log(title, content);
@@ -73,14 +79,15 @@ const navigate = useNavigate()
             })}
         
       </select> */}
-      <select onChange={(e)=>{setCategory(parseInt(e.target.value)); console.log(category);}} name="" id="">
+      {/* <select onChange={(e)=>{setCategory(parseInt(e.target.value)); console.log(category);}} name="" id="">
         
       {options.map((fruit) => <option  value={fruit.id}>{fruit.title}</option>)
         
       }
-      </select>
+      </select> */}
           <h4 className="mt-5 ">Enter blog title</h4>
           <input 
+          value={title}
             onChange={(e) => {
               setTitle(e.target.value);
             }}
@@ -89,6 +96,7 @@ const navigate = useNavigate()
 
           <h4 className="mt-5">Enter blog content</h4>
           <textarea
+          value={content}
             onChange={(e) => {
               setContent(e.target.value);
             }}
@@ -97,11 +105,11 @@ const navigate = useNavigate()
             cols="50"
           />
             <br />
-          <button onClick={onAdd} className="btn btn-info">Add Blog</button>
+          <button onClick={onAdd} className="btn btn-info">Update Blog</button>
         </div>
       </div>
     </div>
   );
 }
 
-export default AddBlog;
+export default UpdateBlog;

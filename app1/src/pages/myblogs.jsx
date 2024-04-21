@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import { Link,Navigate } from 'react-router-dom'
 import CategoryList from '../components/categoryList'
+import MyblogList from '../components/myBlogList'
 
-function Home() {
+function MyBlogs() {
   // get the navigate object
   const navigate = useNavigate()
 
@@ -17,10 +18,10 @@ function Home() {
 
   return (
     <div className='container' >
-      <h2 className='page-title'>Just Blog</h2>
+      <h2 className='page-title'>My Blog</h2>
       <div style={{display:'flex'}}>
         <div >
-          <div style={{}}>
+        <div style={{}}>
           <ul>
                 <li><Link to={'/addblog'}>New Blog</Link></li>
                 <li><Link to={'/myblogs'}>My Blog</Link></li>
@@ -36,7 +37,7 @@ function Home() {
         <br />
         <div>
           <div className='col col-12' >
-             <CategoryList />
+           <MyblogList/>
           </div>
         </div>
       </div>
@@ -48,4 +49,4 @@ function Home() {
   )
 }
 
-export default Home
+export default MyBlogs

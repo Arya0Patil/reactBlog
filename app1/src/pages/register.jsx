@@ -5,11 +5,11 @@ import { register } from '../services/user'
 function RegisterUser() {
   // create state members
   const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
+
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
+  // const [confirmPassword, setConfirmPassword] = useState('')
 
   // get a hook to navigate
   // - navigate is referring a function which is used for navigation
@@ -23,19 +23,14 @@ function RegisterUser() {
     // client side validation
     if (firstName.length === 0) {
       alert('enter first name')
-    } else if (lastName.length === 0) {
-      alert('enter last name')
-    } else if (email.length === 0) {
+     } else if (email.length === 0) {
       alert('enter email')
     } else if (password.length === 0) {
       alert('enter password')
-    } else if (confirmPassword.length === 0) {
-      alert('confirm password')
-    } else if (password !== confirmPassword) {
-      alert('password does not match')
-    } else {
+    }else {
       // make the API call and receive the result
-      const result = await register(firstName, lastName, email, phone, password)
+      const result = await register(firstName, email, phone, password)
+      console.log(result['status']);
       if (result['status'] === 'success') {
         alert('successfully registered a user')
         navigate('/login')
@@ -56,7 +51,7 @@ function RegisterUser() {
           <div className='row'>
             <div className='col'>
               <div className='mb-3'>
-                <label htmlFor=''>First Name</label>
+                <label htmlFor=''>Full Name</label>
                 <input
                   onChange={(e) => {
                     setFirstName(e.target.value)
@@ -67,18 +62,7 @@ function RegisterUser() {
               </div>
             </div>
 
-            <div className='col'>
-              <div className='mb-3'>
-                <label htmlFor=''>Last Name</label>
-                <input
-                  onChange={(e) => {
-                    setLastName(e.target.value)
-                  }}
-                  type='text'
-                  className='form-control'
-                />
-              </div>
-            </div>
+            
           </div>
 
           <div className='row'>
@@ -123,18 +107,6 @@ function RegisterUser() {
               </div>
             </div>
 
-            <div className='col'>
-              <div className='mb-3'>
-                <label htmlFor=''>Confirm Password</label>
-                <input
-                  onChange={(e) => {
-                    setConfirmPassword(e.target.value)
-                  }}
-                  type='password'
-                  className='form-control'
-                />
-              </div>
-            </div>
           </div>
 
           <div className='row'>

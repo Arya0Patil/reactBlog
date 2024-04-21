@@ -1,13 +1,12 @@
 import axios from 'axios'
 import config from '../config'
 
-export async function register(firstName, lastName, email, phone, password) {
+export async function register(firstName, email, phone, password) {
   // body parameters
   const body = {
-    firstName,
-    lastName,
+    "full_name":firstName,
     email,
-    phone,
+    "phone_no":phone,
     password, 
   }
 

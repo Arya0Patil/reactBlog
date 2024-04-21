@@ -3,6 +3,10 @@ create database logapp;
 
 use lagapp;
 
+select blogs.title, blogs.contents,user.full_name,categories.title 
+from blogs,user,categories 
+where user.id = blogs.user_id and blogs.category_id=categories.id;
+
 create table user(
     id integer primary key auto_increment,
     full_name varchar(50),
